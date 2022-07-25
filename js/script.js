@@ -122,7 +122,7 @@ window.addEventListener("DOMContentLoaded", () => {
       closeModal();
     }
   });
-  const modalTimerId = setTimeout(openModal, 5000);
+  // const modalTimerId = setTimeout(openModal, 5000);
 
   function showModalByScroll() {
     if (
@@ -135,4 +135,76 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   window.addEventListener("scroll", showModalByScroll);
+
+  // классы для карточек
+
+  class MenuCard {
+    constructor(src, alt, subtitle, descr, price, parentSelector) {
+      this.src = src;
+      this.alt = alt;
+      this.subtitle = subtitle;
+      this.descr = descr;
+      this.price = price;
+      this.parent = document.querySelector(parentSelector);
+      this.transfer = 27;
+      this.changeToBYN();
+    }
+
+    changeToBYN() {
+      this.price = this.price * this.transfer;
+    }
+
+    render() {
+      const element = document.createElement("div");
+      element.innerHTML = `
+            <div class="menu__item">
+            <img src=${this.src} alt=${this.alt} />
+            <h3 class="menu__item-subtitle">${this.subtitle}</h3>
+            <div class="menu__item-descr">
+              ${this.descr}
+            </div>
+            <div class="menu__item-divider"></div>
+            <div class="menu__item-price">
+              <div class="menu__item-cost">Цена:</div>
+              <div class="menu__item-total"><span>${this.price}</span> грн/день</div>
+            </div>
+          </div>
+      `;
+      this.parent.append(element);
+    }
+  }
+
+  new MenuCard(
+    "img/tabs/vegy.jpg",
+    "vegy",
+    'Меню "Фитнес"',
+    'Меню "Фитнес" - это новый подход к приготовлению блюд: больше\n' +
+      "              свежих овощей и фруктов. Продукт активных и здоровых людей. Это\n" +
+      "              абсолютно новый продукт с оптимальной ценой и высоким качеством!",
+    229,
+    ".menu .container"
+  ).render();
+
+  new MenuCard(
+    "img/tabs/elite.jpg",
+    "elite",
+    'Меню "Премиум"',
+    "В меню “Премиум” мы используем не только красивый дизайн упаковки,\n" +
+      "              но и качественное исполнение блюд. Красная рыба, морепродукты,\n" +
+      "              фрукты - ресторанное меню без похода в ресторан!",
+    550,
+    ".menu .container"
+  ).render();
+
+  new MenuCard(
+    "img/tabs/post.jpg",
+    "post",
+    'Меню "Постное"',
+    "Меню “Постное” - это тщательный подбор ингредиентов: полное\n" +
+      "              отсутствие продуктов животного происхождения, молоко из миндаля,\n" +
+      "              овса, кокоса или гречки, правильное количество белков за счет тофу\n" +
+      "              и импортных вегетарианских стейков.",
+    430,
+    ".menu .container"
+  ).render();
 });
