@@ -222,6 +222,9 @@ window.addEventListener("DOMContentLoaded", () => {
       headers: { "Content-type": "application/json" },
       body: data,
     });
+    if (!res.ok) {
+      throw new Error(`Could not fetch ${url}, status: ${res.status}`);
+    }
 
     return await res.json();
   };
@@ -241,7 +244,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
       const json = JSON.stringify(Object.fromEntries(formData.entries()));
 
-      postData("http://localhost:3000/requests", json)
+      postData("http://localhost:3000/requestes", json)
         .then((data) => {
           console.log(data);
           showThanksModal(message.success);
