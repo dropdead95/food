@@ -1,3 +1,6 @@
+require('es6-promise/auto');
+import 'nodelist-foreach-polyfill';
+
 import calculator from "./modules/calculator";
 import cards from "./modules/cards";
 import forms from "./modules/forms";
@@ -24,7 +27,7 @@ window.addEventListener("DOMContentLoaded", () => {
     totalCounter: "#total",
     currentCounter: "#current",
     wrapper: ".offer__slider-wrapper",
-    field: ".offer__slider-inner"
+    field: ".offer__slider-inner",
   });
   tabs(
     ".tabheader__item",
